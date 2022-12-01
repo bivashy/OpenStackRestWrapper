@@ -16,6 +16,7 @@
     <description>Simple SDK for OpenStack</description>
     <properties>
         <java.version>17</java.version>
+        <openstack4j.version>3.10</openstack4j.version>
         <start-class>com.ubivashka.openstack.api.Main</start-class>
     </properties>
     <dependencies>
@@ -26,6 +27,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.openstack4j.core</groupId>
+            <artifactId>openstack4j</artifactId>
+            <version>${openstack4j.version}</version>
         </dependency>
     </dependencies>
 
