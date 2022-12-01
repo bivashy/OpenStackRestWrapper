@@ -5,6 +5,9 @@ import java.util.List;
 import org.openstack4j.api.OSClient.OSClientV3;
 import org.openstack4j.core.transport.Config;
 import org.openstack4j.model.common.Identifier;
+import org.openstack4j.model.compute.Keypair;
+import org.openstack4j.model.compute.Server;
+import org.openstack4j.model.network.Network;
 import org.openstack4j.model.storage.block.Volume;
 import org.openstack4j.openstack.OSFactory;
 import org.openstack4j.openstack.internal.OSClientSession;
@@ -23,8 +26,19 @@ public class OpenStackAPI {
     }
 
     public List<? extends Volume> getVolumes() {
-        getClient().blockStorage().volumes().create()
         return getClient().blockStorage().volumes().list();
+    }
+
+    public List<? extends Server> getServers() {
+        return getClient().compute().servers().list();
+    }
+
+    public List<? extends Network> getNetworks() {
+        return getClient().networking().network().list();
+    }
+
+    public List<? extends Keypair> getKeypairs() {
+        return getClient().compute().keypairs().list();
     }
 
     public OSClientV3 getClient() {
