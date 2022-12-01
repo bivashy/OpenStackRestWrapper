@@ -41,6 +41,10 @@ public class OpenStackAPI {
         return getClient().compute().keypairs().list();
     }
 
+    public Keypair createKeypair(String name, String publicKey) {
+        return getClient().compute().keypairs().create(name,publicKey);
+    }
+
     public OSClientV3 getClient() {
         if (OSClientSession.getCurrent() == null)
             return OSFactory.clientFromToken(client.getToken(), config);
