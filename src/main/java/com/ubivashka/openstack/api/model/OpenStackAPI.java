@@ -4,9 +4,13 @@ import java.util.List;
 
 import org.openstack4j.api.OSClient.OSClientV3;
 import org.openstack4j.core.transport.Config;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.common.Identifier;
+import org.openstack4j.model.compute.Action;
+import org.openstack4j.model.compute.Flavor;
 import org.openstack4j.model.compute.Keypair;
 import org.openstack4j.model.compute.Server;
+import org.openstack4j.model.compute.ServerCreate;
 import org.openstack4j.model.network.Network;
 import org.openstack4j.model.storage.block.Volume;
 import org.openstack4j.openstack.OSFactory;
@@ -41,8 +45,20 @@ public class OpenStackAPI {
         return getClient().compute().keypairs().list();
     }
 
+    public List<? extends Flavor> getFlavors() {
+        return getClient().compute().flavors().list();
+    }
+
     public Keypair createKeypair(String name, String publicKey) {
-        return getClient().compute().keypairs().create(name,publicKey);
+        return getClient().compute().keypairs().create(name, publicKey);
+    }
+
+    public Server createServer(ServerCreate create) {
+        return getClient().compute().servers().boot(create);
+    }
+
+    public ActionResponse serverAction(String serverId, Action action) {
+        return getClient().compute().servers().action(serverId, action);
     }
 
     public OSClientV3 getClient() {
